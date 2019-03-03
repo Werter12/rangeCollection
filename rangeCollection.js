@@ -32,7 +32,10 @@ class RangeCollection {
      * @private
      */
     _validate(range){
-        return Array.isArray(range) && range.length === 2 && range.every((edge) => typeof edge ==='number' && (edge % 1) === 0);
+        return Array.isArray(range) &&
+            range.length === 2 &&
+            range.every((edge) => typeof edge ==='number' && (edge % 1) === 0) &&
+            range[0] <= range[1];
     }
 
     /**

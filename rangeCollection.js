@@ -7,12 +7,22 @@
  * NOTE: Feel free to add any extra member variables/functions you like.
  */
 class RangeCollection {
+
+    /**
+     *  Init collection of ranges in constructor
+     */
+    constructor(){
+        this._collection = [];
+    }
+
     /**
      * Adds a range to the collection
      * @param {Array<number>} range - Array of two integers that specify beginning and end of range.
      */
     add(range) {
-        // TODO: implement this
+        if (this._validate(range)){
+            this._collection.push(range)
+        }
     }
 
     /**
@@ -25,7 +35,6 @@ class RangeCollection {
         return Array.isArray(range) && range.length === 2 && range.every((edge) => typeof edge ==='number' && (edge % 1) === 0);
     }
 
-  
     /**
      * Removes a range from the collection
      * @param {Array<number>} range - Array of two integers that specify beginning and end of range.
@@ -38,7 +47,7 @@ class RangeCollection {
      * Prints out the list of ranges in the range collection
      */
     print() {
-      // TODO: implement this
+        // TODO: implement this
     }
   }
   

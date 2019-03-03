@@ -47,7 +47,7 @@ class RangeCollection {
      * Prints out the list of ranges in the range collection
      */
     print() {
-        // TODO: implement this
+        console.log(this._collection.map((range) => `[${range.join(' ,')})`).join(' '));
     }
   }
   
@@ -69,27 +69,27 @@ class RangeCollection {
   rc.add([20, 21]);
   rc.print();
   // Should display: [1, 5) [10, 21)
-  
+
   rc.add([2, 4]);
   rc.print();
   // Should display: [1, 5) [10, 21)
-  
+
   rc.add([3, 8]);
   rc.print();
   // Should display: [1, 8) [10, 21)
-  
+
   rc.remove([10, 10]);
   rc.print();
   // Should display: [1, 8) [10, 21)
-  
+
   rc.remove([10, 11]);
   rc.print();
   // Should display: [1, 8) [11, 21)
-  
+
   rc.remove([15, 17]);
   rc.print();
   // Should display: [1, 8) [11, 15) [17, 21)
-  
+
   rc.remove([3, 19]);
   rc.print();
   // Should display: [1, 3) [19, 21)

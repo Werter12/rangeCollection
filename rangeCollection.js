@@ -21,20 +21,26 @@ class RangeCollection {
      */
     add(range) {
         if (this._validate(range)) {
-            if (!this._collection.length || range[0] > this._collection[this._collection.length - 1][1]) {
+            const rangeStart = range[0];
+            const rangeEnd = range[1];
+
+            if (!this._collection.length || rangeStart > this._collection[this._collection.length - 1][1]) {
                 return this._collection.push(range);
             }
-            const collection = [];
+            const tempCollection = [];
             for (const oldRange of this._collection) {
-                if (range[0] > oldRange[1] || range[1] < oldRange[1]) {
-                    collection.push(oldRange);
+                const oldRangeStart = oldRange[0];
+                const oldRangeEnd = oldRange[1];
+
+                if (rangeStart > oldRangeEnd || rangeEnd < oldRangeEnd) {
+                    tempCollection.push(oldRange);
                     continue;
                 }
-                const start = range[0] < oldRange[0] ? range[0] : oldRange[0];
-                const end = range[1] > oldRange[1] ? range[1] : oldRange[1];
-                collection.push([start, end]);
+                const start = rangeStart < oldRangeStart ? rangeStart : oldRangeStart;
+                const end = rangeEnd > oldRangeEnd ? rangeEnd : oldRangeEnd;
+                tempCollection.push([start, end]);
             }
-            this._collection = collection;
+            this._collection = tempCollection;
         }
     }
 
@@ -56,7 +62,9 @@ class RangeCollection {
      * @param {Array<number>} range - Array of two integers that specify beginning and end of range.
      */
     remove(range) {
-      // TODO: implement this
+        if (this._validate(range)) {
+
+        }
     }
   
     /**

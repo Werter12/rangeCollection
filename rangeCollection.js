@@ -20,8 +20,21 @@ class RangeCollection {
      * @param {Array<number>} range - Array of two integers that specify beginning and end of range.
      */
     add(range) {
-        if (this._validate(range)){
-            this._collection.push(range)
+        if (this._validate(range)) {
+            if (!this._collection.length || range[0] > this._collection[this._collection.length - 1][1]) {
+                return this._collection.push(range);
+            }
+            const collection = [];
+            for (const oldRange of this._collection) {
+                if (range[0] > oldRange[1] || range[1] < oldRange[1]) {
+                    collection.push(oldRange);
+                    continue;
+                }
+                const start = range[0] < oldRange[0] ? range[0] : oldRange[0];
+                const end = range[1] > oldRange[1] ? range[1] : oldRange[1];
+                collection.push([start, end]);
+            }
+            this._collection = collection;
         }
     }
 
@@ -68,7 +81,7 @@ class RangeCollection {
   rc.add([20, 20]);
   rc.print();
   // Should display: [1, 5) [10, 20)
-  
+
   rc.add([20, 21]);
   rc.print();
   // Should display: [1, 5) [10, 21)

@@ -62,8 +62,26 @@ class RangeCollection {
      * @param {Array<number>} range - Array of two integers that specify beginning and end of range.
      */
     remove(range) {
-        if (this._validate(range)) {
+        if (this._validate(range) && this._collection.length) {
+            const rangeStart = range[0];
+            const rangeEnd = range[1];
 
+            const tempCollection = this._collection.reduce((acc, currentRange) => {
+                const currentRangeStart = currentRange[0];
+                const currentRangeEnd = currentRange[1];
+
+                if (rangeStart > currentRange[1]){
+                    return [...acc, currentRange];
+                }
+                const start = rangeStart > currentRangeStart ? [[currentRangeStart, rangeStart]] : [];
+                const end = rangeEnd > currentRangeStart && rangeEnd < currentRangeEnd ?  [rangeEnd, currentRangeEnd] : currentRange;
+
+                if (rangeEnd > currentRangeEnd){
+                   return [...acc, ...start];
+                }
+                return [...acc, ...start, end];
+            }, []);
+            this._collection = tempCollection;
         }
     }
   

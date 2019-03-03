@@ -89,7 +89,7 @@ class RangeCollection {
      * Prints out the list of ranges in the range collection
      */
     print() {
-        console.log(this._collection.map((range) => `[${range.join(' ,')})`).join(' '));
+        console.log(this._collection.map((range) => `[${range.join(', ')})`).join(' '));
     }
   }
   

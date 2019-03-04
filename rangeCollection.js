@@ -24,7 +24,7 @@ class RangeCollection {
             const rangeStart = range[0];
             const rangeEnd = range[1];
 
-            if (!this._collection.length || rangeStart > this._collection[this._collection.length - 1][1]) {
+            if (!this._collection.length || this._moreThanCollectionRanges(rangeStart)) {
                 return this._collection.push(range);
             }
             const tempCollection = [];
@@ -42,6 +42,16 @@ class RangeCollection {
             }
             this._collection = tempCollection;
         }
+    }
+
+    /**
+     * Check if provided range start more than collection ranges
+     * @param {number} rangeStart - number from which range starts
+     * @returns {boolean}
+     * @private
+     */
+    _moreThanCollectionRanges(rangeStart){
+        return rangeStart > this._collection[this._collection.length - 1][1]
     }
 
     /**
@@ -66,6 +76,9 @@ class RangeCollection {
             const rangeStart = range[0];
             const rangeEnd = range[1];
 
+            if (this._moreThanCollectionRanges(rangeStart)){
+                return;
+            }
             const tempCollection = this._collection.reduce((acc, currentRange) => {
                 const currentRangeStart = currentRange[0];
                 const currentRangeEnd = currentRange[1];

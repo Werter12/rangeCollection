@@ -28,16 +28,16 @@ class RangeCollection {
                 return this._collection.push(range);
             }
             const tempCollection = [];
-            for (const oldRange of this._collection) {
-                const oldRangeStart = oldRange[0];
-                const oldRangeEnd = oldRange[1];
+            for (const currentRange of this._collection) {
+                const currentRangeStart = currentRange[0];
+                const currentRangeEnd = currentRange[1];
 
-                if (rangeStart > oldRangeEnd || rangeEnd < oldRangeEnd) {
-                    tempCollection.push(oldRange);
+                if (rangeStart > currentRangeEnd || rangeEnd < currentRangeEnd) {
+                    tempCollection.push(currentRange);
                     continue;
                 }
-                const start = rangeStart < oldRangeStart ? rangeStart : oldRangeStart;
-                const end = rangeEnd > oldRangeEnd ? rangeEnd : oldRangeEnd;
+                const start = rangeStart < currentRangeStart ? rangeStart : currentRangeStart;
+                const end = rangeEnd > currentRangeEnd ? rangeEnd : currentRangeEnd;
                 tempCollection.push([start, end]);
             }
             this._collection = tempCollection;
